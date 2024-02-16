@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { TopBar,ProfileCard, FriendsCard, CustomButton, TextInput,Loading, PostCard}  from '../components'
+import { TopBar,ProfileCard, FriendsCard, CustomButton, TextInput,Loading, PostCard, EditProfile}  from '../components'
 import { suggest,requests,posts } from '../assets/data'
 import { Link } from 'react-router-dom'
 import { NoProfile } from '../assets'
@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 
 const Home = () => 
 {
-  const {user} = useSelector(state=> state.user);
+  const {user,edit} = useSelector(state=> state.user);
   const [friendRequest,setFriendRequest]=useState(requests);
   const [suggestedFriends,setSuggestedFriends]=useState(suggest);
   const [errMsg,setErrMsg]=useState("")
@@ -29,7 +29,8 @@ const Home = () =>
 
 
   return (
-    <div className='home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden'>
+    <>  
+      <div className='home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden'>
        <TopBar/>
 
        <div className='w-full flex gap-2 lg:gap-4 pt-5 pb-10 h-full'>
@@ -254,11 +255,14 @@ const Home = () =>
                   }
                 </div>
               </div>
-
           </div>
-
        </div>
     </div>
+
+
+    {edit && <EditProfile/>}
+
+    </>
   )
 }
 
